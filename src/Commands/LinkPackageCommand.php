@@ -46,14 +46,12 @@ class LinkPackageCommand extends Command
 
             @unlink($vendorPath); // remove vendor
             @symlink(strval($url), strval($vendorPath)); // symlink
+
+            $this->comment("Package {$name} symlinked composer.json");
         }
 
         $composer['repositories'] = $repositories->values()->toArray();
-
         file_put_contents(base_path('composer.json'), json_encode($composer, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-
-        $this->comment("Package {$name} symlinked composer.json");
-
         return self::SUCCESS;
     }
 
