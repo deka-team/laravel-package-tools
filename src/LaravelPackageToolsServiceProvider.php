@@ -21,6 +21,7 @@ class LaravelPackageToolsServiceProvider extends PackageServiceProvider
             ->hasMigration('create_laravel-package-tools_table')
             ->hasCommands([
                 Commands\AddPackageCommand::class,
+                Commands\LinkPackageCommand::class,
                 Commands\AddRepositoryCommand::class,
                 Commands\SwitchRepositoryCommand::class,
             ]);

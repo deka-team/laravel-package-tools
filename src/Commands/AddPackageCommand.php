@@ -60,7 +60,7 @@ class AddPackageCommand extends Command
             ]);
         }
 
-        $composer['repositories'] = $repositories->toArray();
+        $composer['repositories'] = $repositories->values()->toArray();
 
         file_put_contents(base_path('composer.json'), json_encode($composer, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 
