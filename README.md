@@ -28,13 +28,13 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'token' => env('GITHUB_TOKEN', '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'),
+    'token' => env('GITHUB_TOKEN'),
     'repo' => [
-        'production' => env('REPO_PRODUCTION', 'https://repo.deka.dev'),
-        'development' => env('REPO_DEVELOPMENT', 'https://repo-deka.test'),
+        'production' => env('REPO_PRODUCTION'),
+        'development' => env('REPO_DEVELOPMENT'),
     ],
     'vendors' => array_map('trim', explode(',', env('PACKAGE_VENDOR', 'deka'))),
-    'directory' => env('PACKAGE_DIRECTORY', '/Users/riskihajar/deka-packages'),
+    'directory' => env('PACKAGE_DIRECTORY'),
 ];
 ```
 
