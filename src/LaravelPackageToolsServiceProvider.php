@@ -4,7 +4,6 @@ namespace Deka\LaravelPackageTools;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Deka\LaravelPackageTools\Commands;
 
 class LaravelPackageToolsServiceProvider extends PackageServiceProvider
 {

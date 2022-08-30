@@ -13,11 +13,11 @@ class AddRepositoryCommand extends Command
     public function handle(): int
     {
         $url = $this->argument('url');
-        $force = $this->option('force') ;
+        $force = $this->option('force');
         $composer = json_decode(file_get_contents(base_path('composer.json')), true);
         $repositories = collect($composer['repositories'] ?? []);
 
-        if($repositories->where('url', $url)->count() === 0){
+        if ($repositories->where('url', $url)->count() === 0) {
             $repositories->add([
                 'type' => 'composer',
                 'url' => $url,

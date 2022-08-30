@@ -2,9 +2,9 @@
 
 namespace Deka\LaravelPackageTools\Tests;
 
+use Deka\LaravelPackageTools\LaravelPackageToolsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Deka\LaravelPackageTools\LaravelPackageToolsServiceProvider;
 
 class TestCase extends Orchestra
 {

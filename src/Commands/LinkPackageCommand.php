@@ -3,9 +3,7 @@
 namespace Deka\LaravelPackageTools\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
 
 class LinkPackageCommand extends Command
 {
@@ -23,14 +21,16 @@ class LinkPackageCommand extends Command
         $composer = json_decode(file_get_contents(base_path('composer.json')), true);
         $require = collect($composer['require'] ?? []);
 
-        foreach($require as $package => $version){
-            if(preg_match($regex, strval($package))) $packages[] = $package;
+        foreach ($require as $package => $version) {
+            if (preg_match($regex, strval($package))) {
+                $packages[] = $package;
+            }
         }
 
         $repositories = collect($composer['repositories'] ?? []);
 
-        foreach($packages as $name){
-            $repositories = $repositories->reject(function($value, $key) use($name){
+        foreach ($packages as $name) {
+            $repositories = $repositories->reject(function ($value, $key) use ($name) {
                 return in_array($value['type'], ['vcs', 'path']) && $value['name'] === $name;
             });
 
@@ -52,29 +52,30 @@ class LinkPackageCommand extends Command
 
         $composer['repositories'] = $repositories->values()->toArray();
         file_put_contents(base_path('composer.json'), json_encode($composer, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+
         return self::SUCCESS;
     }
 
     public function packagePath($name)
     {
         $developmentDir = config('deka.package.directory');
-        throw_if(!file_exists($developmentDir), "Development Package Directory Not Exists");
+        throw_if(! file_exists($developmentDir), 'Development Package Directory Not Exists');
 
         $guessPackageDirs = [
-            "$developmentDir/" . Str::of($name)->basename(),
+            "$developmentDir/".Str::of($name)->basename(),
             "$developmentDir/$name",
         ];
 
         $packageDir = null;
 
-        foreach($guessPackageDirs as $path){
-            if(file_exists($path)){
+        foreach ($guessPackageDirs as $path) {
+            if (file_exists($path)) {
                 $packageDir = $path;
                 break;
             }
         }
 
-        throw_if(!$packageDir, "Package Directory Not Exists $name");
+        throw_if(! $packageDir, "Package Directory Not Exists $name");
 
         return $packageDir;
     }

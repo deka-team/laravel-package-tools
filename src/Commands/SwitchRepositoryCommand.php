@@ -20,17 +20,17 @@ class SwitchRepositoryCommand extends Command
         $composer = json_decode(file_get_contents(base_path('composer.json')), true);
         $repositories = collect($composer['repositories'] ?? []);
 
-        $repositories = $repositories->reject(function($value, $key) use($prodUrl, $devUrl){
+        $repositories = $repositories->reject(function ($value, $key) use ($prodUrl, $devUrl) {
             return $value['type'] === 'composer' && ($value['url'] === $prodUrl || $value['url'] === $devUrl);
         });
 
-        if(in_array($mode, ['dev', 'development', 'local'])){
+        if (in_array($mode, ['dev', 'development', 'local'])) {
             $repositories->add([
                 'type' => 'composer',
                 'url' => $devUrl,
             ]);
             $url = $devUrl;
-        }else{
+        } else {
             $repositories->add([
                 'type' => 'composer',
                 'url' => $prodUrl,
