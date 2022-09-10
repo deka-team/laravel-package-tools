@@ -36,7 +36,7 @@ class LinkPackageCommand extends Command
 
             $url = $this->packagePath($name);
 
-            $repositories->add([
+            $repositories->prepend([
                 'name' => $name,
                 'type' => 'path',
                 'url' => $url,

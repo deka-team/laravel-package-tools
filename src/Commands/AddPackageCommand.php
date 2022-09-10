@@ -52,7 +52,7 @@ class AddPackageCommand extends Command
         };
 
         if ($repositories->where('type', $type)->where('name', $name)->count() === 0) {
-            $repositories->add([
+            $repositories->prepend([
                 'name' => $name,
                 'type' => $type,
                 'url' => $packageUrl,
