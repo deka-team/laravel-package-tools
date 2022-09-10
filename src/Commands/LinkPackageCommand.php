@@ -44,6 +44,7 @@ class LinkPackageCommand extends Command
 
             $vendorPath = base_path("vendor/$name");
 
+            @system("rm -rf $vendorPath");
             @unlink($vendorPath); // remove vendor
             @symlink(strval($url), strval($vendorPath)); // symlink
 
